@@ -353,11 +353,11 @@ for j in range(num_episodes):
 	
 		# The initial calculating of the Q value
 		output_temp = sess.run(a_2_2, feed_dict={X: prev_state[c],
-				  	  legal_actions: prev_legal_actions[c]})
+				  	legal_actions: prev_legal_actions[c]})
 
 		# The initial action associated with the epsilon-greedy policy
 		prev_policy_action_temp, _ = epsilon_greedy_policy(epsilon, output_temp,
-								 	 prev_legal_actions[c])
+					prev_legal_actions[c])
 		prev_policy_action[c] = prev_policy_action_temp
 	
 	
@@ -387,26 +387,26 @@ for j in range(num_episodes):
 		
 			# Forward pass the current state for the current agent
 			curr_agent_output = sess.run(a_2_2, feed_dict={X : curr_agent_state, 
-										  legal_actions: curr_agent_legal_actions})
+						legal_actions: curr_agent_legal_actions})
 			
 			# the action associated with the epsilon-greedy policy q value for the current agent
 			curr_agent_policy_action, curr_agent_policy_q = epsilon_greedy_policy(epsilon,
-													          curr_agent_output, curr_agent_legal_actions)
+						curr_agent_output, curr_agent_legal_actions)
 																					 	
 			# the action associated with the maximal q value for the current agent
 			curr_agent_max_action, curr_agent_max_q = greedy_policy(curr_agent_output)
 			
 			# Forward the current agent previous state with the previous legal actions
 			curr_agent_prev_output_again = sess.run(a_2_2, feed_dict={X: prev_state[colors[turn % 2]],
-													 legal_actions: prev_legal_actions[colors[turn % 2]]})
+						legal_actions: prev_legal_actions[colors[turn % 2]]})
 			
 			# Evaluate a_1 and z_1 layers, in order to feed in the backward pass
 			a_1_eval_temp = a_1.eval(feed_dict={X: prev_state[colors[turn % 2]], 
-													 legal_actions: prev_legal_actions[colors[turn % 2]]})
+						legal_actions: prev_legal_actions[colors[turn % 2]]})
 			z_1_eval_temp = z_1.eval(feed_dict={X: prev_state[colors[turn % 2]],
-													 legal_actions: prev_legal_actions[colors[turn % 2]]})
+						legal_actions: prev_legal_actions[colors[turn % 2]]})
 			z_2_eval_temp = z_2.eval(feed_dict={X: prev_state[colors[turn % 2]],
-													 legal_actions: prev_legal_actions[colors[turn % 2]]})				
+						legal_actions: prev_legal_actions[colors[turn % 2]]})				
 			
 			# Select the q value from the previous run
 			curr_agent_prev_policy_q_again = curr_agent_prev_output_again[0, prev_policy_action[colors[turn % 2]]]
