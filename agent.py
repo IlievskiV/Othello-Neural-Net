@@ -121,7 +121,7 @@ def winner(board):
 	
 	:param board: The board object
 	:return: -1 for black player win, 1 for white player win
-			 and 0 for draw
+	and 0 for draw
 	"""
     black_count = board.count(-1)
     white_count = board.count(1)
@@ -305,10 +305,10 @@ epsilon = 0.1
 gamma = 1.0
 
 # The number of episodes, i.e. the number of games
-num_episodes = 10000
+num_episodes = 1000
 
 total_score = 0
-score_save_freq = 100
+score_save_freq = 10
 all_scores = []
 
 # Creatig a session
